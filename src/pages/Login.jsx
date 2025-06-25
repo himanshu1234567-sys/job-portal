@@ -5,6 +5,11 @@ import { URLS } from '../services/apiurls';
 import { webService } from '../services/apiurls';
 import { loginSuccess } from '../features/auth/authSlice';
 import { useDispatch } from 'react-redux';
+
+
+
+
+
 export default function Login() {
 
 
@@ -87,7 +92,6 @@ const handleLogin = async (e) => {
   </div>
 
   {error && <p className="text-red-500 text-sm mb-2">{error}</p>}
-  {message && <p className="text-green-500 text-sm mb-2">{message}</p>}
 
   <button
     onClick={handleLogin}
