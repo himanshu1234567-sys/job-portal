@@ -1,4 +1,4 @@
-import Job from '../models/jobApplicationSchema.js';
+import Job from '../models/UserJobSchema.js';
 
 export const getAllJobs = async (req, res) => {
   const filters = {};

@@ -2,7 +2,10 @@ import express, { json } from 'express';
 import { connect } from 'mongoose';
 import { config } from 'dotenv';
 import routerA from './routes/authRoutes.js';
-import routerJ from './routes/jobApplicationRoutes.js';
+import routerJ from './routes/userAdminJobRoutes.js';
+import routerApp    from './routes/jobApplication.js';
+import routerUM  from './routes/userManageRoutes.js';
+import routerI from './routes/interviewRoutes.js';
 import cors from 'cors';
 
 config();
@@ -18,8 +21,14 @@ connect(process.env.MONGODB_URI || "mongodb+srv://user:VcXDSrpH97AmxVo5@cluster0
   .then(() => console.log('MongoDB connected'))
   .catch(err => console.log('MongoDB connection error:', err));
 
-app.use('/api/auth', routerA);
-app.use('/api/jobapplication', routerJ);
+app.get('/', (req, res) => {
+  res.send('Welcome to the Job Portal API');
+});
 
+app.use('/api/auth', routerA);
+app.use('/api/userjobs', routerJ);
+app.use('/api/manageapplication', routerApp);
+app.use('/api/manageusers', routerUM);
+app.use('/api/interviews', routerI);
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

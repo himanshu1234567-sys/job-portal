@@ -1,4 +1,4 @@
-import jobschema from '../models/userSchemas.js';
+import jobschema from '../models/authSchema.js';
 import { hash, compare } from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 

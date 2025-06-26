@@ -1,5 +1,5 @@
 import express from 'express';
-import * as jobController from '../controller/jobApplicationsController.js';
+import * as jobController from '../controller/userJobsController.js';
 import { authenticateUser, isAdmin } from '../middlewares/authMiddlewares.js';
 
 const routerJ = express.Router();
