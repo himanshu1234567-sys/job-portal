@@ -1,5 +1,9 @@
+import { useState } from "react"; 
 import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
+import UserManagementModal from "../components/Managepopup"; 
+
+
 import {
     Users,
     Box,
@@ -9,7 +13,7 @@ import {
 
 const Dashboard = () => {
     const navigate = useNavigate();
-
+     const [showUserModal, setShowUserModal] = useState(false);
     const dataCards = [
         { title: "Total Users", icon: <Users className="text-blue-600 w-6 h-6" />, count: 0 },
         { title: "Job Applications", icon: <Box className="text-green-600 w-6 h-6" />, count: 0 },
@@ -52,12 +56,12 @@ const Dashboard = () => {
 
     return (
         <>
-            <Navbar />
-
-            <div className="min-h-screen bg-gray-50 px-4 md:px-8 lg:px-50 py-6">
+        
+             <Navbar />
+            <div className="min-h-screen bg-gray-50 px-4 md:px-8 lg:px-50 lg:  py-6">
                 <h2 className="text-2xl font-bold text-gray-900 mb-2">Admin Control Panel 🔰</h2>
                 <p className="text-gray-600">Manage the JobPortal AI platform and users</p>
-
+            
                 {/* Stats Cards */}
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8 mt-10">
                     {dataCards.map((card, idx) => (
@@ -101,12 +105,12 @@ const Dashboard = () => {
                                             onClick={() => {
                                                 if (sec.status !== "Coming Soon") {
                                                     if (sec.title === "Test Generator") navigate("/TestGenerator");
-                                                    else if (sec.title === "User Management") navigate("/UserManagement");
-                                                    // Add more conditions as needed
+                                                    else if (sec.title === "User Management") setShowUserModal(true);
+                                                    else if (sec.title === "Job Applications") navigate("/jobApplication")
                                                 }
                                             }}
                                         >
-                                            {sec.status === "Coming Soon" ? "Coming Soon" : "Manage"}
+                                            {sec.status === "Coming Soon" ? "   Coming Soon" : "Manage"}
                                         </button>
                                     </div>
                                 </div>
@@ -131,6 +135,10 @@ const Dashboard = () => {
                         <div className="px-6 py-10 text-center text-gray-500">No interviews scheduled</div>
                     </div>
                 </div>
+                {showUserModal && (
+  <UserManagementModal onClose={() => setShowUserModal(false)} />
+)}
+
             </div>
         </>
     );
